@@ -3,6 +3,14 @@ import classes from './page.module.css';
 import { getMeal } from '@/lib/meals';
 import { notFound } from 'next/navigation';
 
+export function generateMetadata({ params }) {
+  const meal = getMeal(params.slug);
+  return {
+    title: meal ? meal.title : 'Meal not found',
+    description: meal ? meal.summary : 'The meal you are looking for does not exist.',
+  }
+}
+
 export default function MealDetailsPage({ params }) {
 
   const meal = getMeal(params.slug);
